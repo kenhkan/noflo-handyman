@@ -1,0 +1,41 @@
+{ "name": "noflo-handyman"
+, "description": "Handy tools for debugging in NoFlo"
+, "keywords":
+  [ "noflo"
+  , "debugging"
+  , "tools"
+  ]
+, "author": "Kenneth Kan <kenhkan@gmail.com>"
+, "version": "0.0.1"
+, "licenses":
+  [ { "type": "MIT"
+    , "url": "https://github.com/kenhkan/noflo-handyman/blob/master/LICENSE.md"
+    }
+  ]
+, "engines":
+  { "node": ">=0.6.0"
+  }
+, "repository":
+  { "type": "git"
+  , "url": "git://github.com/kenhkan/noflo-handyman"
+  }
+, "dependencies":
+  { "noflo": "0.3.x"
+  , "underscore": "1.4.x"
+  , "underscore.string": "2.3.x"
+  , "node-print": "0.0.x"
+  }
+, "devDependencies":
+  { "coffeelint": "*"
+  , "coffee-script": "1.6.x"
+  }
+, "noflo":
+  { "components":
+    { "Quit": "./components/Quit.coffee"
+    , "Log": "./components/Log.coffee"
+    }
+  }
+, "scripts":
+  { "pretest": "./node_modules/.bin/coffeelint -r components"
+  }
+}
