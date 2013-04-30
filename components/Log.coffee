@@ -1,10 +1,17 @@
 noflo = require("noflo")
+_ = require("underscore")
 _s = require("underscore.string")
 print = require("node-print")
+util = require("util")
 
 format = "%13s | %s"
+padding = "              | "
 log = []
 count = 0
+options =
+  showHidden: false
+  depth: 2
+  colors: false
 
 flush = ->
   console.log "---------- NEW STREAM ----------"
@@ -24,6 +31,9 @@ flush = ->
 
 display = (log) ->
   for packet, i in log
+    packet = util.inspect packet,
+      options.showHidden, options.depth, options.colors
+    packet = packet.replace /\n/g, "\n#{padding}"
     print.pf format, "DATA", packet
     delete log[i]
 
@@ -40,8 +50,14 @@ class Log extends noflo.Component
   constructor: ->
     @inPorts =
       in: new noflo.Port
+      options: new noflo.Port
     @outPorts =
       out: new noflo.Port
+
+    @inPorts.options.on "data", (options) =>
+      if _.isObject options
+        for own key, value of options
+          options[key] = value
 
     @inPorts.in.on "connect", =>
       count++
@@ -52,19 +68,19 @@ class Log extends noflo.Component
       here = @locate()
       here[group] = []
       @groups.push group
-      @outPorts.out.beginGroup group
+      @outPorts.out.beginGroup group if @outPorts.out.isAttached()
 
     @inPorts.in.on "data", (data) =>
       here = @locate()
       here.push data
-      @outPorts.out.send data
+      @outPorts.out.send data if @outPorts.out.isAttached()
 
     @inPorts.in.on "endgroup", (group) =>
       @groups.pop()
-      @outPorts.out.endGroup()
+      @outPorts.out.endGroup() if @outPorts.out.isAttached()
 
     @inPorts.in.on "disconnect", =>
-      @outPorts.out.disconnect()
+      @outPorts.out.disconnect() if @outPorts.out.isAttached()
 
       log.push @cache
       count--
