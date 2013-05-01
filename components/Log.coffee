@@ -54,9 +54,9 @@ class Log extends noflo.Component
     @outPorts =
       out: new noflo.Port
 
-    @inPorts.options.on "data", (options) =>
-      if _.isObject options
-        for own key, value of options
+    @inPorts.options.on "data", (otps) =>
+      if _.isObject opts
+        for own key, value of opts
           options[key] = value
 
     @inPorts.in.on "connect", =>
@@ -66,7 +66,7 @@ class Log extends noflo.Component
 
     @inPorts.in.on "begingroup", (group) =>
       here = @locate()
-      here[group] = []
+      here[group] ?= []
       @groups.push group
       @outPorts.out.beginGroup group if @outPorts.out.isAttached()
 
