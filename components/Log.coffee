@@ -14,18 +14,18 @@ options =
   colors: false
 
 flush = ->
-  console.log "---------- NEW STREAM ----------"
+  print.pf "%s", "---------- NEW STREAM ----------"
 
   for l in log.reverse()
-    console.log ""
+    print.pf "%s", ""
     print.pf format, "CONNECT", ""
     display l
     print.pf format, "DISCONNECT", ""
 
-  console.log ""
-  console.log "--------------------------------"
-  console.log ""
-  console.log ""
+  print.pf "%s", ""
+  print.pf "%s", "--------------------------------"
+  print.pf "%s", ""
+  print.pf "%s", ""
 
   log = []
 
