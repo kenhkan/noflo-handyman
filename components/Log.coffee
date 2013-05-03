@@ -44,8 +44,8 @@ display = (log) ->
 
 class Log extends noflo.Component
 
-  description: _s.clean "Log all packets, groups, and disconnects, to be
-  displayed on next tick."
+  description: _s.clean "Log all packets, groups, and disconnects, when
+  the entire stream is complete."
 
   constructor: ->
     @inPorts =
