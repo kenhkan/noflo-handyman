@@ -6,7 +6,7 @@
   , "tools"
   ]
 , "author": "Kenneth Kan <kenhkan@gmail.com>"
-, "version": "0.0.2"
+, "version": "0.0.3"
 , "licenses":
   [ { "type": "MIT"
     , "url": "https://github.com/kenhkan/noflo-handyman/blob/master/LICENSE.md"

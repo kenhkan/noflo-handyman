@@ -4,8 +4,9 @@ _s = require("underscore.string")
 print = require("node-print")
 util = require("util")
 
-format = "%13s | %s"
-padding = "              | "
+emptyFormat = "-"
+displayFormat = "- %13s | %s"
+padding = "-               | "
 log = []
 count = 0
 options =
@@ -14,18 +15,18 @@ options =
   colors: false
 
 flush = ->
-  print.pf "%s", "---------- NEW STREAM ----------"
+  print.pf "%s", "------------ STREAM ------------"
 
   for l in log.reverse()
-    print.pf "%s", ""
-    print.pf format, "CONNECT", ""
+    print.pf emptyFormat
+    print.pf displayFormat, "CONNECT", ""
     display l
-    print.pf format, "DISCONNECT", ""
+    print.pf displayFormat, "DISCONNECT", ""
 
-  print.pf "%s", ""
+  print.pf emptyFormat
   print.pf "%s", "--------------------------------"
-  print.pf "%s", ""
-  print.pf "%s", ""
+  print.pf emptyFormat
+  print.pf emptyFormat
 
   log = []
 
@@ -34,13 +35,13 @@ display = (log) ->
     packet = util.inspect packet,
       options.showHidden, options.depth, options.colors
     packet = packet.replace /\n/g, "\n#{padding}"
-    print.pf format, "DATA", packet
+    print.pf displayFormat, "DATA", packet
     delete log[i]
 
   for group, l of log
-    print.pf format, "BEGINGROUP", group
+    print.pf displayFormat, "BEGINGROUP", group
     display l
-    print.pf format, "ENDGROUP", group
+    print.pf displayFormat, "ENDGROUP", group
 
 class Log extends noflo.Component
 
