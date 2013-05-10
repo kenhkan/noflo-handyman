@@ -1,8 +1,9 @@
-noflo = require("noflo")
-_ = require("underscore")
-_s = require("underscore.string")
-print = require("node-print")
-util = require("util")
+noflo = require "noflo"
+_ = require "underscore"
+_s = require "underscore.string"
+print = require "node-print"
+util = require "util"
+dcopy = require "deep-copy"
 
 emptyFormat = "-"
 displayFormat = "- %13s | %s"
@@ -55,7 +56,7 @@ class Log extends noflo.Component
     @outPorts =
       out: new noflo.Port
 
-    @inPorts.options.on "data", (otps) =>
+    @inPorts.options.on "data", (opts) =>
       if _.isObject opts
         for own key, value of opts
           options[key] = value
@@ -73,7 +74,7 @@ class Log extends noflo.Component
 
     @inPorts.in.on "data", (data) =>
       here = @locate()
-      here.push data
+      here.push dcopy data
       @outPorts.out.send data if @outPorts.out.isAttached()
 
     @inPorts.in.on "endgroup", (group) =>

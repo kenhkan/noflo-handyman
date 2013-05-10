@@ -6,7 +6,7 @@
   , "tools"
   ]
 , "author": "Kenneth Kan <kenhkan@gmail.com>"
-, "version": "0.0.3"
+, "version": "0.0.4"
 , "licenses":
   [ { "type": "MIT"
     , "url": "https://github.com/kenhkan/noflo-handyman/blob/master/LICENSE.md"
@@ -24,6 +24,7 @@
   , "underscore": "1.4.x"
   , "underscore.string": "2.3.x"
   , "node-print": "0.0.x"
+  , "deep-copy": "1.0.x"
   }
 , "devDependencies":
   { "coffeelint": "*"
