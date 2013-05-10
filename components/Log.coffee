@@ -3,7 +3,7 @@ _ = require "underscore"
 _s = require "underscore.string"
 print = require "node-print"
 util = require "util"
-dcopy = require "deep-copy"
+{ deepCopy } = require "owl-deepcopy"
 
 emptyFormat = "-"
 displayFormat = "- %13s | %s"
@@ -74,7 +74,7 @@ class Log extends noflo.Component
 
     @inPorts.in.on "data", (data) =>
       here = @locate()
-      here.push dcopy data
+      here.push deepCopy data
       @outPorts.out.send data if @outPorts.out.isAttached()
 
     @inPorts.in.on "endgroup", (group) =>
