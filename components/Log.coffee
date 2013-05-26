@@ -33,8 +33,7 @@ flush = ->
 
 display = (log) ->
   for packet, i in log
-    packet = util.inspect packet,
-      options.showHidden, options.depth, options.colors
+    packet = util.inspect packet, options
     packet = packet.replace /\n/g, "\n#{padding}"
     print.pf displayFormat, "DATA", packet
     delete log[i]
