@@ -1,8 +1,8 @@
-noflo = require("noflo")
+noflo = require "noflo"
 
 class Quit extends noflo.Component
 
-  description: "quit the Node.js session"
+  description: "Quit the Node.js session"
 
   constructor: ->
     @inPorts =
