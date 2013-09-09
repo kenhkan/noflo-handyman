@@ -1,0 +1,26 @@
+{
+  "name": "noflo-handyman",
+  "repo": "kenhkan/noflo-handyman",
+  "description": "Handy tools for debugging in NoFlo",
+  "keywords": [
+    "noflo",
+    "debug",
+    "debugging",
+    "tools"
+  ],
+  "author": "Kenneth Kan <kenhkan@gmail.com>",
+  "version": "0.0.8",
+  "dependencies": {
+    "noflo/noflo": "*"
+  },
+  "scripts": [
+    "index.js"
+  ],
+  "json": [
+    "component.json"
+  ],
+  "noflo": {
+    "components": {
+    }
+  }
+}

@@ -1,5 +1,4 @@
-Handy tools for debugging in NoFlo [![Build Status](https://secure.travis-ci.org/kenhkan/noflo-handyman.png?branch=master)](https://travis-ci.org/kenhkan/noflo-handyman)
-===============================
+# Handy tools for debugging <br/>[![Build Status](https://secure.travis-ci.org/kenhkan/noflo-handyman.png?branch=master)](https://travis-ci.org/kenhkan/noflo-handyman) [![Dependency Status](https://gemnasium.com/kenhkan/noflo-handyman.png)](https://gemnasium.com/kenhkan/noflo-handyman) [![NPM version](https://badge.fury.io/js/noflo-handyman.png)](http://badge.fury.io/js/noflo-handyman) [![Stories in Ready](https://badge.waffle.io/kenhkan/noflo-handyman.png)](http://waffle.io/kenhkan/noflo-handyman)
 
 This package provides various components to drop-in debugging in
 [NoFlo](http://noflojs.org/).
@@ -8,8 +7,7 @@ Feel free to contribute new components and graphs! I'll try to
 incorporate as soon as time allows.
 
 
-Usage
--------------------------------
+## Usage
 
 ### Quit ###
 
