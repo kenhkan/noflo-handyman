@@ -48,9 +48,12 @@ class Log extends noflo.Component
   entire stream is complete."
 
   constructor: ->
+    @tag = null
+
     @inPorts =
       in: new noflo.Port
       options: new noflo.Port
+      tag: new noflo.Port
     @outPorts =
       out: new noflo.Port
 
@@ -59,10 +62,16 @@ class Log extends noflo.Component
         for own key, value of opts
           options[key] = value
 
+    @inPorts.tag.on "data", (@tag) =>
+
     @inPorts.in.on "connect", =>
       count++
       @cache = []
       @groups = []
+
+      if @tag?
+        @cache[@tag] ?= []
+        @groups.push @tag
 
     @inPorts.in.on "begingroup", (group) =>
       here = @locate()
@@ -81,6 +90,8 @@ class Log extends noflo.Component
 
     @inPorts.in.on "disconnect", =>
       @outPorts.out.disconnect() if @outPorts.out.isAttached()
+
+      @groups.pop() if @tag?
 
       log.push @cache
       count--
