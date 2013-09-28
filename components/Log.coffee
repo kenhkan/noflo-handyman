@@ -31,11 +31,11 @@ flush = ->
   log = []
 
 display = (log) ->
-  for packet, i in log
+  for packet, i in log.__CONTENT__ or []
     packet = util.inspect packet, options
     packet = packet.replace /\n/g, "\n#{padding}"
     print.pf displayFormat, "DATA", packet
-    delete log[i]
+    delete log.__CONTENT__
 
   for group, l of log
     print.pf displayFormat, "BEGINGROUP", group
@@ -66,11 +66,11 @@ class Log extends noflo.Component
 
     @inPorts.in.on "connect", =>
       count++
-      @cache = []
+      @cache = {}
       @groups = []
 
       if @tag?
-        @cache[@tag] ?= []
+        @cache[@tag] ?= {}
         @groups.push @tag
 
     @inPorts.in.on "begingroup", (group) =>
@@ -81,7 +81,8 @@ class Log extends noflo.Component
 
     @inPorts.in.on "data", (data) =>
       here = @locate()
-      here.push deepCopy data
+      here.__CONTENT__ ?= []
+      here.__CONTENT__.push deepCopy data
       @outPorts.out.send data if @outPorts.out.isAttached()
 
     @inPorts.in.on "endgroup", (group) =>
