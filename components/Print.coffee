@@ -33,7 +33,7 @@ class Print extends noflo.Component
       console.log "DISCONNECT"
       @outPorts.out.disconnect()
 
-  prepareOutput: data ->
+  prepareOutput: (data) ->
     JSON.parse JSON.stringify data
 
 exports.getComponent = -> new Print
